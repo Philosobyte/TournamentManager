@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Tournaments"
+            android:name=".TournamentActivity"
             android:label="TournamentManager"
             android:launchMode="singleTop">
             <intent-filter>
@@ -19,22 +19,22 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Rounds"
+            android:name=".RoundActivity"
             android:label="Rounds"
-            android:parentActivityName=".Tournaments"
+            android:parentActivityName=".TournamentActivity"
             android:launchMode="singleTop">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Tournaments" />
+                android:value=".TournamentActivity" />
         </activity>
         <activity
-            android:name=".Matches"
+            android:name=".MatchActivity"
             android:label="Matches"
-            android:parentActivityName=".Rounds"
+            android:parentActivityName=".RoundActivity"
             android:launchMode="singleTop">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Rounds" />
+                android:value=".RoundActivity" />
         </activity>
     </application>
 

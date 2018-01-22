@@ -16,12 +16,14 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.philosobyte.tournamentmanager.model.Round;
+
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Tournaments extends AppCompatActivity {
+public class TournamentActivity extends AppCompatActivity {
     ListView lvRounds;
     SelectableAdapter raRounds;
     EditText etRoundName;
@@ -35,7 +37,7 @@ public class Tournaments extends AppCompatActivity {
         Log.d("Tournaments onCreate", "entered");
         rounds = new LinkedHashMap<>();
 
-        setContentView(R.layout.activity_tournaments);
+        setContentView(R.layout.activity_tournament);
         setSupportActionBar(findViewById(R.id.toolbar));
         getSupportActionBar().setTitle("Rounds");
 
@@ -45,7 +47,7 @@ public class Tournaments extends AppCompatActivity {
         chkWinFromSel = findViewById(R.id.chk_win_from_sel);
         btnAdd = findViewById(R.id.btn_add);
 
-        raRounds = new RoundAdapter(this, lvRounds, R.layout.round, R.id.tv_round_name, R.id.btn_view, R.id.btn_remove);
+        raRounds = new RoundAdapter(this, lvRounds, R.layout.item_round, R.id.tv_round_name, R.id.btn_view, R.id.btn_remove);
         lvRounds.setAdapter(raRounds);
 
         //Set navigation listeners
@@ -108,7 +110,7 @@ public class Tournaments extends AppCompatActivity {
 
     public void viewRound(View view) {
         String roundName = ((TextView) ((ViewGroup) view.getParent()).findViewById(R.id.tv_round_name)).getText().toString();
-        Intent intent = new Intent(this, Rounds.class);
+        Intent intent = new Intent(this, RoundActivity.class);
         Bundle extras = new Bundle();
         ArrayList<Parcelable> roundBundles = new ArrayList<>();
         rounds.forEach((name, round) -> roundBundles.add(round.toBundle()));

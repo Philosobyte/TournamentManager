@@ -18,6 +18,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.philosobyte.tournamentmanager.model.Round;
+
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -27,7 +29,7 @@ import java.util.Map;
  * Created by Ray on 1/10/2018.
  */
 
-public class Rounds extends AppCompatActivity {
+public class RoundActivity extends AppCompatActivity {
     Map<String, Round> rounds;
     Round currentRound;
     EditText etMatchName;
@@ -58,7 +60,7 @@ public class Rounds extends AppCompatActivity {
         });
         currentRound = rounds.get(roundName);
 
-        setContentView(R.layout.activity_rounds);
+        setContentView(R.layout.activity_round);
         setSupportActionBar(findViewById(R.id.toolbar));
         getSupportActionBar().setTitle(roundName);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -73,10 +75,10 @@ public class Rounds extends AppCompatActivity {
         btnAdd = findViewById(R.id.btn_add);
 
         //Initialize adapters for ListViews
-        saPlayers = new SelectableAdapter(this, lvPlayers, R.layout.player, R.id.tv_player_name, R.id.btn_remove);
-        saPlayersInMatch = new SelectableAdapter(this, lvPlayersInMatch,R.layout.player_in_match, R.id.tv_player_name, R.id.btn_remove_player);
-        saPlayersNotInMatch = new SelectableAdapter(this, lvPlayersNotInMatch, R.layout.player_not_in_round, R.id.tv_player_name, R.id.btn_add_player);
-        saMatches = new SelectableAdapter(this, lvMatches, R.layout.match, R.id.tv_match_name, R.id.btn_view, R.id.btn_remove);
+        saPlayers = new SelectableAdapter(this, lvPlayers, R.layout.item_player, R.id.tv_player_name, R.id.btn_remove);
+        saPlayersInMatch = new SelectableAdapter(this, lvPlayersInMatch,R.layout.item_player_in_match, R.id.tv_player_name, R.id.btn_remove_player);
+        saPlayersNotInMatch = new SelectableAdapter(this, lvPlayersNotInMatch, R.layout.item_player_not_in_round, R.id.tv_player_name, R.id.btn_add_player);
+        saMatches = new SelectableAdapter(this, lvMatches, R.layout.item_match, R.id.tv_match_name, R.id.btn_view, R.id.btn_remove);
 
         lvPlayers.setAdapter(saPlayers);
         lvPlayersInMatch.setAdapter(saPlayersInMatch);
@@ -204,7 +206,7 @@ public class Rounds extends AppCompatActivity {
 
     public void viewMatch(View view) {
         String matchName = ((TextView) ((ViewGroup) view.getParent()).findViewById(R.id.tv_match_name)).getText().toString();
-        Intent intent = new Intent(this, Matches.class);
+        Intent intent = new Intent(this, MatchActivity.class);
         Bundle extras = new Bundle();
         ArrayList<Parcelable> roundBundles = new ArrayList<>();
         rounds.forEach((name, round) -> {

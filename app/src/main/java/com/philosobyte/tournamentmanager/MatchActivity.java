@@ -10,12 +10,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Filter;
 import android.widget.ListView;
+
+import com.philosobyte.tournamentmanager.model.Match;
+import com.philosobyte.tournamentmanager.model.Round;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -26,7 +28,7 @@ import java.util.stream.Collectors;
  * Created by Ray on 1/19/2018.
  */
 
-public class Matches extends AppCompatActivity {
+public class MatchActivity extends AppCompatActivity {
 
     Map<String, Round> rounds;
     Round currentRound;
@@ -59,7 +61,7 @@ public class Matches extends AppCompatActivity {
         currentRound = rounds.get(roundName);
         currentMatch = currentRound.getMatch(matchName);
 
-        setContentView(R.layout.activity_matches);
+        setContentView(R.layout.activity_match);
         setSupportActionBar(findViewById(R.id.toolbar));
         getSupportActionBar().setTitle(matchName);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -72,9 +74,9 @@ public class Matches extends AppCompatActivity {
         lvPlayersNotInMatch = findViewById(R.id.lv_players_not_in_match);
 
         //Initialize adapters for ListViews
-        saPlayers = new FilterWinnersAdapter(this, lvPlayers, R.layout.player, R.id.tv_player_name, R.id.btn_remove);
-        saPlayersInMatch = new SelectableAdapter(this, lvPlayersInMatch, R.layout.player_in_match, R.id.tv_player_name, R.id.btn_remove_player);
-        saPlayersNotInMatch = new SelectableAdapter(this, lvPlayersNotInMatch, R.layout.player_not_in_round, R.id.tv_player_name, R.id.btn_add_player);
+        saPlayers = new FilterWinnersAdapter(this, lvPlayers, R.layout.item_player, R.id.tv_player_name, R.id.btn_remove);
+        saPlayersInMatch = new SelectableAdapter(this, lvPlayersInMatch, R.layout.item_player_in_match, R.id.tv_player_name, R.id.btn_remove_player);
+        saPlayersNotInMatch = new SelectableAdapter(this, lvPlayersNotInMatch, R.layout.item_player_not_in_round, R.id.tv_player_name, R.id.btn_add_player);
 
         lvPlayers.setAdapter(saPlayers);
         lvPlayersInMatch.setAdapter(saPlayersInMatch);

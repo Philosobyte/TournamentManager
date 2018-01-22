@@ -1,4 +1,4 @@
-package com.philosobyte.tournamentmanager;
+package com.philosobyte.tournamentmanager.model;
 
 import android.os.Bundle;
 
