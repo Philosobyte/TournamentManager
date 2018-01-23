@@ -13,6 +13,7 @@ TournamentManager is an Android app for tournament organizers to run a tournamen
 Bugs to Fix
 + Disallow duplicate names
 + Disallow white space or an empty string as names
++ Currently the Enter key will create a new line in a text edit box. The Enter key should map to a button.
 
 Features to implement
 + Allow the user to view all the winners for a particular Round
