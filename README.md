@@ -1,6 +1,6 @@
 # TournamentManager
 
-TournamentManager is an Android app for tournament organizers to run a tournament in a highly flexible manner. Ever wished you could add players mid-tournament? Or set two winners per match instead of just one? This app allows just that by offering you full control over a simple model instead of shoehorning your tournament into complicated or predefined brackets.
+TournamentManager is an Android app for tournament organizers to run a tournament in a highly flexible manner. Have you ever wished you could add players mid-tournament? Or set two winners per match instead of just one? This app allows just that by offering you full control over a simple model instead of shoehorning your tournament into complicated or predefined brackets.
 
 ### What TournamentManager is and is not
 This app is not for viewing or displaying a tournament in a pretty graph. TournamentManager is strictly meant for running a tournament behind the scenes. The hope for this app is to help local and student organizers - who don't have custom-tailored software - to keep their tournament running smoothly.
@@ -14,7 +14,7 @@ This app is not for viewing or displaying a tournament in a pretty graph. Tourna
 + Players may be set as winners in a particular Match. Once set as winners for a Match, the players are also winners for the Match's parent Round.
 
 ### Installation
-The latest unsigned apk may be downloaded and installed on the [releases page](https://github.com/Philosobyte/TournamentManager/releases). I am corrently working on getting TournamentManager on the Google Play Store.
+The latest unsigned apk may be downloaded and installed on the [releases page](https://github.com/Philosobyte/TournamentManager/releases). I am working on getting TournamentManager on the Google Play Store.
 
 ### What's next
 Bugs to fix:
