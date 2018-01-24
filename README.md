@@ -1,6 +1,6 @@
 # TournamentManager
 
-TournamentManager is an Android app for tournament organizers to run a tournament in a highly flexible manner. Ever wished you could add players mid-tournament? Or set two winners per match instead of just one? This app allows just that by offering you full control over a simplistic model instead of shoehorning your tournament into complicated or predefined brackets.
+TournamentManager is an Android app for tournament organizers to run a tournament in a highly flexible manner. Ever wished you could add players mid-tournament? Or set two winners per match instead of just one? This app allows just that by offering you full control over a simple model instead of shoehorning your tournament into complicated or predefined brackets.
 ### Tournament Model
 + Hierarchy = Tournament -> Round -> Match -> Player. This means multiple players per match, multiple matches per round, and multiple rounds per tournament.
 + Each round and match can be given custom names
