@@ -30,19 +30,19 @@ import java.util.Map;
  */
 
 public class RoundActivity extends AppCompatActivity {
-    Map<String, Round> rounds;
-    Round currentRound;
-    EditText etMatchName;
-    EditText etPlayerName;
-    SelectableAdapter saPlayers;
-    SelectableAdapter saPlayersInMatch;
-    SelectableAdapter saPlayersNotInMatch;
-    SelectableAdapter saMatches;
-    ListView lvMatches;
-    ListView lvPlayers;
-    ListView lvPlayersInMatch;
-    ListView lvPlayersNotInMatch;
-    Button btnAdd;
+    private Map<String, Round> rounds;
+    private Round currentRound;
+    private EditText etMatchName;
+    private EditText etPlayerName;
+    private SelectableAdapter saPlayers;
+    private SelectableAdapter saPlayersInMatch;
+    private SelectableAdapter saPlayersNotInMatch;
+    private SelectableAdapter saMatches;
+    private ListView lvMatches;
+    private ListView lvPlayers;
+    private ListView lvPlayersInMatch;
+    private ListView lvPlayersNotInMatch;
+    private Button btnAdd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

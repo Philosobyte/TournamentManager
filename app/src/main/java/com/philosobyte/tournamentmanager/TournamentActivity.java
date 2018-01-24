@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -24,12 +25,12 @@ import java.util.List;
 import java.util.Map;
 
 public class TournamentActivity extends AppCompatActivity {
-    ListView lvRounds;
-    SelectableAdapter raRounds;
-    EditText etRoundName;
-    Map<String, Round> rounds;
-    CheckBox chkWinFromSel;
-    Button btnAdd;
+    private ListView lvRounds;
+    private SelectableAdapter raRounds;
+    private EditText etRoundName;
+    private Map<String, Round> rounds;
+    private CheckBox chkWinFromSel;
+    private Button btnAdd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +48,8 @@ public class TournamentActivity extends AppCompatActivity {
         chkWinFromSel = findViewById(R.id.chk_win_from_sel);
         btnAdd = findViewById(R.id.btn_add);
 
-        raRounds = new RoundAdapter(this, lvRounds, R.layout.item_round, R.id.tv_round_name, R.id.btn_view, R.id.btn_remove);
+        raRounds = new RoundAdapter(this, lvRounds, R.layout.item_round,
+                                    R.id.tv_round_name, R.id.btn_view, R.id.btn_remove);
         lvRounds.setAdapter(raRounds);
 
         //Set navigation listeners
@@ -103,13 +105,13 @@ public class TournamentActivity extends AppCompatActivity {
     }
 
     public void removeRound(View view) {
-        String roundName = ((TextView) ((ViewGroup) view.getParent()).findViewById(R.id.tv_round_name)).getText().toString();
+        String roundName = getAssociatedRoundName((ImageButton)view);
         raRounds.remove(roundName);
         rounds.remove(roundName);
     }
 
     public void viewRound(View view) {
-        String roundName = ((TextView) ((ViewGroup) view.getParent()).findViewById(R.id.tv_round_name)).getText().toString();
+        String roundName = getAssociatedRoundName((ImageButton)view);
         Intent intent = new Intent(this, RoundActivity.class);
         Bundle extras = new Bundle();
         ArrayList<Parcelable> roundBundles = new ArrayList<>();
@@ -118,6 +120,14 @@ public class TournamentActivity extends AppCompatActivity {
         extras.putString("currentRound", roundName);
         intent.putExtras(extras);
         startActivity(intent);
+    }
+
+    /*
+     * Obtains the round name associated with an ImageButton in a ListView using a SelectableAdapter
+     */
+    private String getAssociatedRoundName(ImageButton button) {
+        TextView tvRoundName = ((ViewGroup)button.getParent()).findViewById(R.id.tv_round_name);
+        return tvRoundName.getText().toString();
     }
 
     class RoundAdapter extends SelectableAdapter {

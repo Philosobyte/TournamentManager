@@ -30,18 +30,18 @@ import java.util.stream.Collectors;
 
 public class MatchActivity extends AppCompatActivity {
 
-    Map<String, Round> rounds;
-    Round currentRound;
-    Match currentMatch;
-    Button btnSetWinner;
-    CheckBox chkFilterWinners;
-    boolean filterWinners;
-    SelectableAdapter saPlayers;
-    SelectableAdapter saPlayersInMatch;
-    SelectableAdapter saPlayersNotInMatch;
-    ListView lvPlayers;
-    ListView lvPlayersInMatch;
-    ListView lvPlayersNotInMatch;
+    private Map<String, Round> rounds;
+    private Round currentRound;
+    private Match currentMatch;
+    private Button btnSetWinner;
+    private CheckBox chkFilterWinners;
+    private boolean filterWinners;
+    private SelectableAdapter saPlayers;
+    private SelectableAdapter saPlayersInMatch;
+    private SelectableAdapter saPlayersNotInMatch;
+    private ListView lvPlayers;
+    private ListView lvPlayersInMatch;
+    private ListView lvPlayersNotInMatch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,9 +74,14 @@ public class MatchActivity extends AppCompatActivity {
         lvPlayersNotInMatch = findViewById(R.id.lv_players_not_in_match);
 
         //Initialize adapters for ListViews
-        saPlayers = new FilterWinnersAdapter(this, lvPlayers, R.layout.item_player, R.id.tv_player_name, R.id.btn_remove);
-        saPlayersInMatch = new SelectableAdapter(this, lvPlayersInMatch, R.layout.item_player_in_match, R.id.tv_player_name, R.id.btn_remove_player);
-        saPlayersNotInMatch = new SelectableAdapter(this, lvPlayersNotInMatch, R.layout.item_player_not_in_round, R.id.tv_player_name, R.id.btn_add_player);
+        saPlayers = new FilterWinnersAdapter(this, lvPlayers,
+                R.layout.item_player, R.id.tv_player_name, R.id.btn_remove);
+
+        saPlayersInMatch = new SelectableAdapter(this, lvPlayersInMatch,
+                R.layout.item_player_in_match, R.id.tv_player_name, R.id.btn_remove_player);
+
+        saPlayersNotInMatch = new SelectableAdapter(this, lvPlayersNotInMatch,
+                R.layout.item_player_not_in_round, R.id.tv_player_name, R.id.btn_add_player);
 
         lvPlayers.setAdapter(saPlayers);
         lvPlayersInMatch.setAdapter(saPlayersInMatch);
@@ -100,12 +105,11 @@ public class MatchActivity extends AppCompatActivity {
             case android.R.id.home:
                 Bundle extras = new Bundle();
                 ArrayList<Parcelable> roundBundles = new ArrayList<>();
-                rounds.forEach((name, round) -> {
-                    roundBundles.add(round.toBundle());
-                });
+                rounds.forEach((name, round) -> roundBundles.add(round.toBundle()));
                 extras.putParcelableArrayList("roundBundles", roundBundles);
                 extras.putString("currentRound", currentRound.getName());
-                NavUtils.navigateUpTo(this, NavUtils.getParentActivityIntent(this).putExtras(extras));
+                NavUtils.navigateUpTo(
+                        this, NavUtils.getParentActivityIntent(this).putExtras(extras));
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -180,7 +184,8 @@ public class MatchActivity extends AppCompatActivity {
 
     class FilterWinnersAdapter extends SelectableAdapter {
 
-        public FilterWinnersAdapter(Activity activity, ListView lv, int resId, int tvId, int... btnIds) {
+        public FilterWinnersAdapter(
+                Activity activity, ListView lv, int resId, int tvId, int... btnIds) {
             super(activity, lv, resId, tvId, btnIds);
             filter = new Filter() {
 

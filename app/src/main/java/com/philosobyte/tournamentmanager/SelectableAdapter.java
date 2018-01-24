@@ -21,25 +21,15 @@ import java.util.stream.Collectors;
  */
 public class SelectableAdapter extends BaseAdapter implements AdapterView.OnItemClickListener, Filterable {
 
-    public SelectableAdapter(Activity activity, ListView lv, int resId, int tvId, int... btnIds) {
-        this.context = activity;
-        this.resId = resId;
-        this.tvId = tvId;
-        this.btnIds = btnIds;
-        this.lv = lv;
-        lv.setOnItemClickListener(this);
-        items = new ArrayList<>();
-        filteredItems = new ArrayList<>();
-    }
-    ListView lv;
-    int resId;
-    int tvId;
-    int[] btnIds;
-    Activity context;
-    int selectedItem = -1;
-    List<String> items;
-    List<String> filteredItems;
-    Filter filter = new Filter() {
+    protected ListView lv;
+    protected int resId;
+    protected int tvId;
+    protected int[] btnIds;
+    protected Activity context;
+    protected int selectedItem = -1;
+    protected List<String> items;
+    protected List<String> filteredItems;
+    protected Filter filter = new Filter() {
 
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
@@ -56,6 +46,17 @@ public class SelectableAdapter extends BaseAdapter implements AdapterView.OnItem
         }
     };
 
+    public SelectableAdapter(Activity activity, ListView lv, int resId, int tvId, int... btnIds) {
+        this.context = activity;
+        this.resId = resId;
+        this.tvId = tvId;
+        this.btnIds = btnIds;
+        this.lv = lv;
+        lv.setOnItemClickListener(this);
+        items = new ArrayList<>();
+        filteredItems = new ArrayList<>();
+    }
+
     @Override
     public int getCount() {
         return filteredItems.size();
@@ -71,10 +72,10 @@ public class SelectableAdapter extends BaseAdapter implements AdapterView.OnItem
         return 0;
     }
 
-
     public List<String> getItems() {
         return new ArrayList<>(items);
     }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         final View finalConvertView;

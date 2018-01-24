@@ -6,13 +6,14 @@ import android.os.Parcelable;
 import java.util.*;
 import java.util.logging.Logger;
 
+
 public class Round {
-    static Logger logger = Logger.getGlobal();
+    private static Logger logger = Logger.getGlobal();
     private String name;
     private ArrayList<String> players;
-    private ArrayList<String> playersNotInMatch;
     private ArrayList<String> winners;
-    private HashMap<String, Match> matches;
+    private ArrayList<String> playersNotInMatch;    //Subset of players, who are not in a match
+    private LinkedHashMap<String, Match> matches;   //LinkedHashMap to keep order while iterating
     private boolean finished;
     private Random random = new Random();
 
@@ -50,6 +51,7 @@ public class Round {
         bundle.putStringArrayList("winners", winners);
         bundle.putBoolean("finished", finished);
         ArrayList<Parcelable> matchBundles = new ArrayList<>();
+
         matches.forEach((name, match) -> matchBundles.add(match.toBundle()));
         bundle.putParcelableArrayList("matchBundles", matchBundles);
         return bundle;

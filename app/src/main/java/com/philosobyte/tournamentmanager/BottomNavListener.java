@@ -10,19 +10,17 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
-/**
- * Created by Ray on 1/18/2018.
- */
 
 class BottomNavListener implements BottomNavigationView.OnNavigationItemSelectedListener {
-    CheckBox checkBox;
-    Button btnAdd;
-    EditText editText;
-    String savedAddText = "";
-    String savedSearchText = "";
-    MenuItem lastSelected;
-    SelectableAdapter adapter;
-    TextWatcher textWatcher = new TextWatcher() {
+    private CheckBox checkBox;
+    private Button btnAdd;
+    private EditText editText;
+    private String savedAddText;
+    private String savedSearchText;
+    private MenuItem lastSelected;
+    private SelectableAdapter adapter;
+    /* Searches the listview after each keypress */
+    private TextWatcher searchListener = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             //STUB
@@ -54,19 +52,20 @@ class BottomNavListener implements BottomNavigationView.OnNavigationItemSelected
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         if (item == lastSelected) {
-            return true;
+            return true;            //Reselecting an item should not do anything
         }
         lastSelected = item;
         switch (item.getItemId()) {
             case R.id.action_add:
                 savedSearchText = editText.getText().toString();
+                /* Nullcheck for BottomNavs which don't have checkboxes */
                 if (checkBox != null) {
                     checkBox.setVisibility(View.VISIBLE);
                 }
                 btnAdd.setVisibility(View.VISIBLE);
-                editText.removeTextChangedListener(textWatcher);
-                adapter.getFilter().filter("");
-                editText.setText(savedAddText);
+                editText.removeTextChangedListener(searchListener);
+                adapter.getFilter().filter(""); //Make the ListView show its full contents
+                editText.setText(savedAddText != null ? savedAddText : "");
                 break;
             case R.id.action_search:
                 savedAddText = editText.getText().toString();
@@ -74,8 +73,8 @@ class BottomNavListener implements BottomNavigationView.OnNavigationItemSelected
                     checkBox.setVisibility(View.GONE);
                 }
                 btnAdd.setVisibility(View.GONE);
-                editText.addTextChangedListener(textWatcher);
-                editText.setText(savedSearchText);
+                editText.addTextChangedListener(searchListener);
+                editText.setText(savedSearchText != null ? savedSearchText : "");
 
         }
         return true;

@@ -6,8 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
+
 public class Match {
-    static Logger logger = Logger.getGlobal();
+    private static Logger logger = Logger.getGlobal();
     private String name;
     private ArrayList<String> players;
     private ArrayList<String> winners;
